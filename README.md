@@ -1,6 +1,6 @@
 # Claude Security Code Review Skill (Opus 4.5)
 
-A **repeatable, high-signal security code review** “skill” designed for use with **Claude Code (Opus 4.5)**. It focuses on finding **real vulnerabilities** (not style nits), explaining exploitability clearly, and producing **actionable fixes + tests** that engineering teams can ship. :contentReference[oaicite:1]{index=1}
+A **repeatable, high-signal security code review** “skill” designed for use with **Claude Code (Opus 4.5)**. It focuses on finding **real vulnerabilities** (not style nits), explaining exploitability clearly, and producing **actionable fixes + tests** that engineering teams can ship.
 
 ## What this is
 
@@ -15,13 +15,13 @@ This repo contains a single skill definition: `skill.md`, which provides:
 
 ## Scope
 
-Covers: web apps, APIs, CLIs, backend services, IaC, CI/CD, auth flows, OWASP/CWE-class issues, threat-model-lite checks, dependency/supply-chain triage, and secrets/sensitive data handling. :contentReference[oaicite:3]{index=3}
+Covers: web apps, APIs, CLIs, backend services, IaC, CI/CD, auth flows, OWASP/CWE-class issues, threat-model-lite checks, dependency/supply-chain triage, and secrets/sensitive data handling.
 
 Not covered: full pentests/live exploitation, PoCs requiring running untrusted code in production, and offensive weaponization guidance. 
 ## Inputs to provide (minimum + recommended)
 
 **Minimum viable input**
-- A PR/diff + how it’s deployed (cloud/on-prem, public-facing vs internal) :contentReference[oaicite:5]{index=5}
+- A PR/diff + how it’s deployed (cloud/on-prem, public-facing vs internal)
 
 **Better inputs**
 - PR link or patch/diff
@@ -55,16 +55,15 @@ Also tag:
 Copy/paste one of these into Claude Code and attach your diff/PR context.
 
 **Quick PR triage**
-> Review this diff for security risks. Prioritize by exploitability and production impact. For each finding, include exact file locations, a minimal fix, and a regression test idea. If something is only a concern under assumptions, state them. :contentReference[oaicite:9]{index=9}
-
+> Review this diff for security risks. Prioritize by exploitability and production impact. For each finding, include exact file locations, a minimal fix, and a regression test idea. If something is only a concern under assumptions, state them. 
 **AuthZ / IDOR pass**
-> Trace authorization for all resource accesses changed in this diff. Look for IDOR/object ownership gaps, role bypasses, and missing server-side checks. Provide one concrete exploit scenario per issue. :contentReference[oaicite:10]{index=10}
+> Trace authorization for all resource accesses changed in this diff. Look for IDOR/object ownership gaps, role bypasses, and missing server-side checks. Provide one concrete exploit scenario per issue.
 
 **Injection pass**
-> Identify any user-controlled data reaching SQL/NoSQL queries, shell commands, templates, file paths, or deserializers. Flag only issues with a plausible path. Provide safe coding alternatives. :contentReference[oaicite:11]{index=11}
+> Identify any user-controlled data reaching SQL/NoSQL queries, shell commands, templates, file paths, or deserializers. Flag only issues with a plausible path. Provide safe coding alternatives.
 
 **SSRF / outbound fetcher pass**
-> Locate all outbound requests (HTTP/DNS). Check for SSRF, allowlist, redirect handling, timeout, DNS rebinding, and metadata endpoint access. Recommend hardened client settings. :contentReference[oaicite:12]{index=12}
+> Locate all outbound requests (HTTP/DNS). Check for SSRF, allowlist, redirect handling, timeout, DNS rebinding, and metadata endpoint access. Recommend hardened client settings.
 
 **Logging / secrets pass**
 > Find any place secrets/PII could be logged, returned, or stored insecurely (tokens, passwords, API keys). Suggest redaction patterns and safe logging conventions.
